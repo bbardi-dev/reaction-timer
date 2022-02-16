@@ -20,7 +20,7 @@ export default defineComponent({
   methods: {
     play() {
       this.isPlaying = true;
-      this.delay = 1000 + Math.random() * 4000;
+      this.delay = 100 + Math.random() * 4000;
     },
   },
 });
