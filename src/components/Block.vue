@@ -30,6 +30,7 @@ export default defineComponent({
     stopTimer() {
       clearInterval(this.timer);
       this.showBlock = false;
+      this.$emit("end", this.reactionTime);
     },
   },
 });
