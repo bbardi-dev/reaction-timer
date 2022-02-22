@@ -1,5 +1,12 @@
 <template>
-  <div v-if="showBlock" id="block" @click="stopTimer">Click me!</div>
+  <div
+    v-if="showBlock"
+    id="block"
+    :style="[position, height, width]"
+    @click="stopTimer"
+  >
+    👋
+  </div>
 </template>
 
 <script lang="ts">
@@ -13,7 +20,17 @@ export default defineComponent({
       showBlock: false,
       timer: 0,
       reactionTime: 0,
+      position: "",
+      width: "",
+      height: "",
     };
+  },
+  created() {
+    let x = Math.floor(Math.random() * 200);
+    let y = Math.floor(Math.random() * 200);
+    this.position = `transform: translate(${x}%, ${y}%);`;
+    this.height = `height: ${Math.floor(Math.random() * 100)}px`;
+    this.width = `width: ${Math.floor(Math.random() * 360)}px`;
   },
   mounted() {
     setTimeout(() => {
@@ -38,15 +55,15 @@ export default defineComponent({
 
 <style>
 #block {
-  width: 320px;
   border-radius: 24px;
   background: #0faf87;
   color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  padding: 6rem 0;
-  margin: 5rem auto;
-  font-size: 3rem;
-  font-weight: 600;
+  padding: 3rem;
+  margin: 6rem auto;
   cursor: pointer;
 }
 </style>
