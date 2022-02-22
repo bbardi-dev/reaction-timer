@@ -1,12 +1,5 @@
 <template>
-  <div
-    v-if="showBlock"
-    id="block"
-    :style="[position, height, width]"
-    @click="stopTimer"
-  >
-    👋
-  </div>
+  <div v-if="showBlock" id="block" :style="position" @click="stopTimer">👋</div>
 </template>
 
 <script lang="ts">
@@ -21,16 +14,19 @@ export default defineComponent({
       timer: 0,
       reactionTime: 0,
       position: "",
-      width: "",
-      height: "",
     };
   },
   created() {
-    let x = Math.floor(Math.random() * 200);
-    let y = Math.floor(Math.random() * 200);
-    this.position = `transform: translate(${x}%, ${y}%);`;
-    this.height = `height: ${Math.floor(Math.random() * 100)}px`;
-    this.width = `width: ${Math.floor(Math.random() * 360)}px`;
+    let x = Math.floor(Math.random() * (Math.random() * 500));
+    let y = Math.floor(Math.random() * (Math.random() * 500));
+    function adjustX(x: number) {
+      if (Math.floor(Math.random() * 10) > 5) {
+        return x;
+      } else {
+        return x * -1;
+      }
+    }
+    this.position = `transform: translate(${adjustX(x)}%, ${y}%);`;
   },
   mounted() {
     setTimeout(() => {
@@ -55,6 +51,8 @@ export default defineComponent({
 
 <style>
 #block {
+  width: 64px;
+  height: 64px;
   border-radius: 24px;
   background: #0faf87;
   color: #fff;
