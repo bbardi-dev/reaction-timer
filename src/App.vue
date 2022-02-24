@@ -5,32 +5,25 @@
   <Block v-if="isPlaying" :delay="delay" @end="endGame" />
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
 import Block from "./components/Block.vue";
-import { defineComponent } from "vue";
+import { ref } from "vue";
 
-export default defineComponent({
-  name: "App",
-  components: { Block },
-  data() {
-    return {
-      isPlaying: false,
-      delay: 0,
-      score: 0,
-    };
-  },
-  methods: {
-    play() {
-      this.score = 0;
-      this.isPlaying = true;
-      this.delay = 100 + Math.random() * 4000;
-    },
-    endGame(reactionTime: number) {
-      this.score = reactionTime;
-      this.isPlaying = false;
-    },
-  },
-});
+const isPlaying = ref(false);
+const delay = ref(0);
+const score = ref(0);
+
+function play() {
+  console.log("PLAYED");
+  score.value = 0;
+  isPlaying.value = true;
+  delay.value = 500 + Math.random() * 1500;
+}
+
+function endGame(reactionTime: number) {
+  score.value = reactionTime;
+  isPlaying.value = false;
+}
 </script>
 
 <style>

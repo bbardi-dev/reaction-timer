@@ -2,51 +2,60 @@
   <div v-if="showBlock" id="block" :style="position" @click="stopTimer">👋</div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import { onMounted, ref } from "vue";
 
-export default defineComponent({
-  name: "Block",
-  props: ["delay"],
-  data() {
-    return {
-      showBlock: false,
-      timer: 0,
-      reactionTime: 0,
-      position: "",
-    };
-  },
-  created() {
-    let x = Math.floor(Math.random() * (Math.random() * 500));
-    let y = Math.floor(Math.random() * (Math.random() * 500));
-    function adjustX(x: number) {
-      if (Math.floor(Math.random() * 10) > 5) {
-        return x;
-      } else {
-        return x * -1;
-      }
+const props = defineProps<{ delay: number }>();
+const emit = defineEmits(["end"]);
+
+const showBlock = ref(false);
+const timer = ref(0);
+const reactionTime = ref(0);
+const position = ref("");
+
+onMounted(() => {
+  function adjustX(x: number) {
+    if (Math.floor(Math.random() * 10) > 5) {
+      return x;
+    } else {
+      return x * -1;
     }
-    this.position = `transform: translate(${adjustX(x)}%, ${y}%);`;
-  },
-  mounted() {
-    setTimeout(() => {
-      this.showBlock = true;
-      this.startTimer();
-    }, this.delay);
-  },
-  methods: {
-    startTimer() {
-      this.timer = setInterval(() => {
-        this.reactionTime += 10;
-      }, 10);
-    },
-    stopTimer() {
-      clearInterval(this.timer);
-      this.showBlock = false;
-      this.$emit("end", this.reactionTime);
-    },
-  },
+  }
+
+  let x = randomInt(10, 400);
+  let y = randomInt(10, 300);
+
+  position.value = `transform: translate(${adjustX(x)}%, ${y}%);`;
+
+  setTimeout(() => {
+    showBlock.value = true;
+    startTimer();
+  }, props.delay);
 });
+
+function randomInt(min: number, max: number) {
+  if (max == null) {
+    max = min;
+    min = 0;
+  }
+  if (min > max) {
+    let tmp = min;
+    min = max;
+    max = tmp;
+  }
+  return Math.floor((max - min + 1) * Math.random() + min);
+}
+
+function startTimer() {
+  timer.value = setInterval(() => {
+    reactionTime.value += 10;
+  }, 10);
+}
+function stopTimer() {
+  clearInterval(timer.value);
+  showBlock.value = false;
+  emit("end", reactionTime);
+}
 </script>
 
 <style>
