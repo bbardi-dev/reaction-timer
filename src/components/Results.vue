@@ -1,5 +1,5 @@
 <template>
-  <h2 v-if="score">Reaction Time: {{ score }}ms</h2>
+  <h2 v-if="score">Your Average Reaction Time: {{ score }}ms</h2>
   <p @click="playAgain">Play Again...</p>
 </template>
 <script setup lang="ts">
@@ -10,6 +10,7 @@ function playAgain() {
   emit("playAgain");
 }
 </script>
+
 <style>
 h2 {
   font-size: 2rem;

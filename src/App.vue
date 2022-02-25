@@ -1,8 +1,17 @@
 <template>
-  <Home v-if="isPlaying === 'initial'" :play="play" />
-  <Block v-if="isPlaying === 'playing'" :delay="delay" @end="endGame" />
+  <h4 id="round-counter" v-if="gameState === 'playing'">
+    Round: {{ roundsInPlay }}
+  </h4>
+
+  <Home v-if="gameState === 'initial'" :play="play" @rounds="setRounds" />
+  <Block
+    v-if="gameState === 'playing'"
+    :delay="delay"
+    @end="endRound"
+    :key="times"
+  />
   <Results
-    v-if="isPlaying === 'results'"
+    v-if="gameState === 'results'"
     :score="score"
     @playAgain="returnToInitial"
   />
@@ -16,42 +25,72 @@ import { ref } from "vue";
 
 export type gameState = "initial" | "playing" | "results";
 
-const isPlaying = ref<gameState>("initial");
+const gameState = ref<gameState>("initial");
 const delay = ref(0);
 const score = ref(0);
+const times = ref(0);
+const roundsInPlay = ref(1);
+let gameRounds = 1;
+
+function setRounds(rounds: number) {
+  gameRounds = rounds;
+  roundsInPlay.value = rounds;
+}
 
 function play() {
   score.value = 0;
-  isPlaying.value = "playing";
+  gameState.value = "playing";
   delay.value = 500 + Math.random() * 1500;
 }
 
-function endGame(reactionTime: number) {
-  score.value = reactionTime;
-  isPlaying.value = "results";
+function endRound(reactionTime: number) {
+  times.value += reactionTime;
+  roundsInPlay.value--;
+  if (roundsInPlay.value > 0) play();
+  else endGame(times.value / gameRounds);
+}
+
+function endGame(final: number) {
+  score.value = final;
+  gameState.value = "results";
 }
 
 function returnToInitial() {
-  isPlaying.value = "initial";
+  gameState.value = "initial";
 }
 </script>
 
 <style>
+html,
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
   font-size: 62.5%;
+  text-align: center;
+
+  color: #fff;
+  background-color: #2c3e50;
 
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto;
+  margin: 0;
   padding: 0;
   width: 100%;
-  min-height: 90vh;
+  min-height: 100vh;
+}
+
+#round-counter {
+  position: absolute;
+  top: 0;
+  font-size: 2.5rem;
 }
 </style>

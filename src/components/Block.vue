@@ -1,5 +1,7 @@
 <template>
-  <div v-if="showBlock" id="block" :style="position" @click="stopTimer">👋</div>
+  <div v-if="showBlock" id="block" :style="position" @click="stopTimer">
+    <span id="hand">👋</span>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -14,8 +16,8 @@ const showBlock = ref(false);
 const position = ref("");
 
 onMounted(() => {
-  let x = adjustCoordinates(randomInt(10, 400));
-  let y = adjustCoordinates(randomInt(10, 200));
+  let x = adjustCoordinates(randomInt(10, 480));
+  let y = adjustCoordinates(randomInt(10, 240));
 
   position.value = `transform: translate(${x}%, ${y}%);`;
 
@@ -68,6 +70,9 @@ function randomInt(min: number, max: number) {
   padding: 3rem;
   margin: 6rem auto;
   cursor: pointer;
+}
+
+#hand {
   font-size: 2rem;
 }
 </style>
