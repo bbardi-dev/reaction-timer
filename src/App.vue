@@ -1,29 +1,38 @@
 <template>
-  <Main :play="play" :isPlaying="isPlaying" />
-  <!-- <Results :score="score" />
-  <Block v-if="isPlaying" :delay="delay" @end="endGame" /> -->
+  <Home v-if="isPlaying === 'initial'" :play="play" />
+  <Block v-if="isPlaying === 'playing'" :delay="delay" @end="endGame" />
+  <Results
+    v-if="isPlaying === 'results'"
+    :score="score"
+    @playAgain="returnToInitial"
+  />
 </template>
 
 <script setup lang="ts">
-import Main from "./components/Main.vue";
+import Home from "./components/Home.vue";
 import Block from "./components/Block.vue";
 import Results from "./components/Results.vue";
 import { ref } from "vue";
 
-const isPlaying = ref(false);
+export type gameState = "initial" | "playing" | "results";
+
+const isPlaying = ref<gameState>("initial");
 const delay = ref(0);
 const score = ref(0);
 
 function play() {
-  console.log("PLAYED");
   score.value = 0;
-  isPlaying.value = true;
+  isPlaying.value = "playing";
   delay.value = 500 + Math.random() * 1500;
 }
 
 function endGame(reactionTime: number) {
   score.value = reactionTime;
-  isPlaying.value = false;
+  isPlaying.value = "results";
+}
+
+function returnToInitial() {
+  isPlaying.value = "initial";
 }
 </script>
 
@@ -35,5 +44,14 @@ function endGame(reactionTime: number) {
   text-align: center;
   color: #2c3e50;
   font-size: 62.5%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+  min-height: 90vh;
 }
 </style>

@@ -14,8 +14,8 @@ const showBlock = ref(false);
 const position = ref("");
 
 onMounted(() => {
-  let x = adjustX(randomInt(10, 400));
-  let y = randomInt(10, 300);
+  let x = adjustCoordinates(randomInt(10, 400));
+  let y = adjustCoordinates(randomInt(10, 200));
 
   position.value = `transform: translate(${x}%, ${y}%);`;
 
@@ -31,13 +31,12 @@ function stopTimer() {
   emit("end", reactionTime);
 }
 
-//Utility functions
-
-function adjustX(x: number) {
+// Utility functions
+function adjustCoordinates(coord: number) {
   if (Math.floor(Math.random() * 10) > 5) {
-    return x;
+    return coord;
   } else {
-    return x * -1;
+    return coord * -1;
   }
 }
 
@@ -69,5 +68,6 @@ function randomInt(min: number, max: number) {
   padding: 3rem;
   margin: 6rem auto;
   cursor: pointer;
+  font-size: 2rem;
 }
 </style>

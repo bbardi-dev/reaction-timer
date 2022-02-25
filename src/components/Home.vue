@@ -1,25 +1,15 @@
 <template lang="">
   <div class="main">
     <h1>Simple Reaction Timer</h1>
-    <button @click="play" :disabled="isPlaying">Play</button>
+    <button @click="play">Play</button>
   </div>
 </template>
 
 <script setup lang="ts">
-const props = defineProps<{ isPlaying: boolean; play: () => void }>();
+const props = defineProps<{ play: () => void }>();
 </script>
 
 <style>
-.main {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto;
-  width: 100%;
-  min-height: 90vh;
-}
-
 h1 {
   font-size: 4rem;
 }
