@@ -1,12 +1,13 @@
 <template>
-  <h1>Simple Reaction Timer</h1>
-  <button @click="play" :disabled="isPlaying">Play</button>
-  <p v-if="score">Reaction Time: ~{{ score }}ms</p>
-  <Block v-if="isPlaying" :delay="delay" @end="endGame" />
+  <Main :play="play" :isPlaying="isPlaying" />
+  <!-- <Results :score="score" />
+  <Block v-if="isPlaying" :delay="delay" @end="endGame" /> -->
 </template>
 
 <script setup lang="ts">
+import Main from "./components/Main.vue";
 import Block from "./components/Block.vue";
+import Results from "./components/Results.vue";
 import { ref } from "vue";
 
 const isPlaying = ref(false);
@@ -33,22 +34,6 @@ function endGame(reactionTime: number) {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
-}
-
-button {
-  border: none;
-  background: #0faf87;
-  color: #fff;
-  font-weight: 500;
-  font-size: 1.5rem;
-  border-radius: 6px;
-  text-align: center;
-  letter-spacing: 0.05rem;
-  padding: 0.5rem 4rem;
-  cursor: pointer;
-}
-button:disabled {
-  background: #af0f32;
+  font-size: 62.5%;
 }
 </style>

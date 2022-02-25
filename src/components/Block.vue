@@ -8,30 +8,38 @@ import { onMounted, ref } from "vue";
 const props = defineProps<{ delay: number }>();
 const emit = defineEmits(["end"]);
 
+let startTime: number;
+let reactionTime = 0;
 const showBlock = ref(false);
-const timer = ref(0);
-const reactionTime = ref(0);
 const position = ref("");
 
 onMounted(() => {
-  function adjustX(x: number) {
-    if (Math.floor(Math.random() * 10) > 5) {
-      return x;
-    } else {
-      return x * -1;
-    }
-  }
-
-  let x = randomInt(10, 400);
+  let x = adjustX(randomInt(10, 400));
   let y = randomInt(10, 300);
 
-  position.value = `transform: translate(${adjustX(x)}%, ${y}%);`;
+  position.value = `transform: translate(${x}%, ${y}%);`;
 
   setTimeout(() => {
     showBlock.value = true;
-    startTimer();
+    startTime = Date.now();
   }, props.delay);
 });
+
+function stopTimer() {
+  showBlock.value = false;
+  reactionTime = Date.now() - startTime;
+  emit("end", reactionTime);
+}
+
+//Utility functions
+
+function adjustX(x: number) {
+  if (Math.floor(Math.random() * 10) > 5) {
+    return x;
+  } else {
+    return x * -1;
+  }
+}
 
 function randomInt(min: number, max: number) {
   if (max == null) {
@@ -44,17 +52,6 @@ function randomInt(min: number, max: number) {
     max = tmp;
   }
   return Math.floor((max - min + 1) * Math.random() + min);
-}
-
-function startTimer() {
-  timer.value = setInterval(() => {
-    reactionTime.value += 10;
-  }, 10);
-}
-function stopTimer() {
-  clearInterval(timer.value);
-  showBlock.value = false;
-  emit("end", reactionTime);
 }
 </script>
 
