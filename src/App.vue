@@ -35,7 +35,6 @@ let gameRounds = 1;
 function setRounds(rounds: number) {
   gameRounds = rounds;
   roundsInPlay.value = rounds;
-  console.log(rounds);
 }
 
 function play() {

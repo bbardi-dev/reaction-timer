@@ -1,6 +1,6 @@
 <template>
   <div v-if="showBlock" id="block" :style="position" @click="stopTimer">
-    <span id="hand">👋</span>
+    <span alt="handwave" id="hand">👋</span>
   </div>
 </template>
 
@@ -35,7 +35,7 @@ function stopTimer() {
 
 // Utility functions
 function adjustCoordinates(coord: number) {
-  if (Math.floor(Math.random() * 10) > 5) {
+  if (randomInt(0, 10) > 5) {
     return coord;
   } else {
     return coord * -1;
@@ -74,5 +74,11 @@ function randomInt(min: number, max: number) {
 
 #hand {
   font-size: 2rem;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 </style>

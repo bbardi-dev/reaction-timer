@@ -1,9 +1,9 @@
-<template lang="">
+<template>
   <h1>Simple Reaction Timer</h1>
   <div id="menu">
     <button @click="play">Play</button>
     <span>Number of rounds:</span>
-    <select @change="emission" v-model="rounds" name="rounds" id="rounds">
+    <select @change="emitRounds" v-model="rounds" name="rounds" id="rounds">
       <option v-for="option in options" :value="option">
         {{ option }}
       </option>
@@ -19,7 +19,7 @@ const rounds = ref("1");
 const options = ref([1, 3, 5, 10, 15, 20, 30]);
 const emit = defineEmits(["rounds"]);
 
-function emission() {
+function emitRounds() {
   emit("rounds", rounds.value);
 }
 </script>
