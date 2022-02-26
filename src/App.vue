@@ -35,10 +35,10 @@ let gameRounds = 1;
 function setRounds(rounds: number) {
   gameRounds = rounds;
   roundsInPlay.value = rounds;
+  console.log(rounds);
 }
 
 function play() {
-  score.value = 0;
   gameState.value = "playing";
   delay.value = 500 + Math.random() * 1500;
 }
@@ -56,6 +56,11 @@ function endGame(final: number) {
 }
 
 function returnToInitial() {
+  delay.value = 0;
+  score.value = 0;
+  times.value = 0;
+  roundsInPlay.value = 1;
+  gameRounds = 1;
   gameState.value = "initial";
 }
 </script>

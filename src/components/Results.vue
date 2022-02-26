@@ -1,5 +1,5 @@
 <template>
-  <h2 v-if="score">Your Average Reaction Time: {{ score }}ms</h2>
+  <h2 v-if="score">Your Average Reaction Time: {{ score.toFixed(1) }}ms</h2>
   <p @click="playAgain">Play Again...</p>
 </template>
 <script setup lang="ts">
