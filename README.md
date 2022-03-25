@@ -1,11 +1,23 @@
-# Vue 3 + Typescript + Vite
+# Reaction Timer
 
-This template should help get you started developing with Vue 3 and Typescript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+A simple reaction timer "game", built in Vue.
 
-## Recommended IDE Setup
+## Demo
 
-- [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=johnsoncodehk.volar)
+Deployed at: https://loving-goldberg-628e4e.netlify.app/
 
-## Type Support For `.vue` Imports in TS
+![Demo](reaction-timer.gif)
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's `.vue` type support plugin by running `Volar: Switch TS Plugin on/off` from VSCode command palette.
+## Features
+
+- Multiple rounds
+- Click target in random locations
+- Calculate average reaction time in milliseconds
+
+## Tech Stack
+
+**Client:** Typescript, Vue, Vite
+
+## Lessons Learned
+
+The basics of Vue, Options API vs. Composition API vs. Script Setup, props, emits, reactive(ref), directives, data binding
