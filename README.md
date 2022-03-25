@@ -4,7 +4,7 @@ A simple reaction timer "game", built in Vue.
 
 ## Demo
 
-Deployed at: https://loving-goldberg-628e4e.netlify.app/
+Deployed at: "https://loving-goldberg-628e4e.netlify.app/"
 
 ![Demo](reaction-timer.gif)
 
@@ -17,6 +17,7 @@ Deployed at: https://loving-goldberg-628e4e.netlify.app/
 ## Tech Stack
 
 **Client:** Typescript, Vue, Vite
+Deployed on Netlify.
 
 ## Lessons Learned
 
