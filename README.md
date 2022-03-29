@@ -16,7 +16,8 @@ Deployed at: "https://loving-goldberg-628e4e.netlify.app/"
 
 ## Tech Stack
 
-**Client:** Typescript, Vue, Vite
+**Client:** Typescript, Vue, Vite.
+
 Deployed on Netlify.
 
 ## Lessons Learned
