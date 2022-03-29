@@ -1,6 +1,6 @@
 # Reaction Timer
 
-A simple reaction timer "game", built in Vue.
+A simple reaction timer game, built in Vue3. Features rounds and calculation of average reaction time in milliseconds and the end of selected number of rounds. Start of my journey to learn Vue.js
 
 ## Demo
 
